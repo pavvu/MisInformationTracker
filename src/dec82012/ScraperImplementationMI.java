@@ -62,6 +62,7 @@ public class ScraperImplementationMI {
 		SimpleLayout layout = new SimpleLayout();  
 	    FileAppender appender = new FileAppender(layout, fileNameAndPath,false);  
 	    appender.setLayout(new PatternLayout("%d{yyyy-MM-dd HH:mm:ss} [%t] %m%n"));
+	    fileLogger.removeAllAppenders();
 	    fileLogger.addAppender(appender);
 	    fileLogger.setLevel((Level) Level.INFO);
 		fileLogger.info("Starting up...");
