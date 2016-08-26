@@ -48,17 +48,17 @@ public class ScraperImplementationMI {
 	 *  Logger someLogger = Logger.getLogger("MasterLogger");
 	 *  This way I don't need to keep passing around the reference. 
 	 */
-	private static Logger fileLogger = Logger.getLogger("fileLogger");
-	private static Logger emailLogger = Logger.getLogger("emailLogger");
+	private static Logger fileLogger; 
+	private static Logger emailLogger; 
 	
 	//this will create a new logger for the new day
-	
 	public static void updateLogger() throws IOException
 	{
+		fileLogger = Logger.getLogger("fileLogger");
+		emailLogger = Logger.getLogger("emailLogger");
 		DateTime currentTime = new DateTime();
 		currentDate = currentTime.getMonthOfYear() + "_" + currentTime.getDayOfMonth() + "_" + currentTime.getYear();
-		//checkDate = currentTime.getMonthOfYear() + "_" + currentTime.getDayOfMonth() + "_" + currentTime.getYear();
-		String fileNameAndPath = Settings.getFilePathForLogFile() + "logFile" + currentDate + ".txt";
+		String fileNameAndPath = Settings.getFilePathForLogFile() + "File_" + currentDate + ".txt";
 		SimpleLayout layout = new SimpleLayout();  
 	    FileAppender appender = new FileAppender(layout, fileNameAndPath,false);  
 	    appender.setLayout(new PatternLayout("%d{yyyy-MM-dd HH:mm:ss} [%t] %m%n"));
@@ -76,17 +76,6 @@ public class ScraperImplementationMI {
 		System.setProperty ("twitter4j.loggerFactory","twitter4j.internal.logging.NullLoggerFactory");
 		PropertyConfigurator.configure("log4j.properties");
 		updateLogger();
-		/*DateTime currentTime = new DateTime();
-		DateTime checkTime;
-		currentDate = currentTime.getMonthOfYear() + "_" + currentTime.getDayOfMonth() + "_" + currentTime.getYear();
-		//checkDate = currentTime.getMonthOfYear() + "_" + currentTime.getDayOfMonth() + "_" + currentTime.getYear();
-		String fileNameAndPath = Settings.getFilePathForLogFile() + "logFile" + currentDate + ".txt";
-		SimpleLayout layout = new SimpleLayout();  
-	    FileAppender appender = new FileAppender(layout, fileNameAndPath,false);  
-	    appender.setLayout(new PatternLayout("%d{yyyy-MM-dd HH:mm:ss} [%t] %m%n"));
-	    fileLogger.addAppender(appender);
-	    fileLogger.setLevel((Level) Level.INFO);
-		fileLogger.info("Starting up...");*/
 		DateTime checkTime;
 		Toolkit.getDefaultToolkit().beep();
 		try {
@@ -142,12 +131,6 @@ public class ScraperImplementationMI {
 		// If the output table already exists, update each Tracker's timeIndex variable
 		
 		scraper2.collectUserTweets();
-		//scraper2.getPastNTweets();
-		/*String startDate = "2016-01-16";
-		String endDate =   "2016-01-23";
-		//scraper2.getTweetsDuring(startDate, endDate);
-		scraper2.getPastNTweets();*/
-		//scraper2.getPastNTweets();
 		while (numberOfScrapingSessions < Settings.getNumberOfScrapingSessions())	
 		{
 			checkTime = new DateTime();
@@ -167,8 +150,6 @@ public class ScraperImplementationMI {
 				totalUserTweets=0;
 			}
 			try {
-				//scraper.scrapeYahooMainPage();
-				//numberOfScrapingSessions++;
 				recordScraping++;
 				fileLogger.info(recordScraping + " successful scraping sessions.");
 				fileLogger.info(totalUserTweets + " total User tweets scraped.");
