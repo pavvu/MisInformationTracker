@@ -58,10 +58,11 @@ public class ScraperImplementationMI {
 		DateTime currentTime = new DateTime();
 		currentDate = currentTime.getMonthOfYear() + "_" + currentTime.getDayOfMonth() + "_" + currentTime.getYear();
 		//checkDate = currentTime.getMonthOfYear() + "_" + currentTime.getDayOfMonth() + "_" + currentTime.getYear();
-		String fileNameAndPath = Settings.getFilePathForLogFile() + "logFile" + currentDate + ".txt";
+		String fileNameAndPath = Settings.getFilePathForLogFile() + "File_" + currentDate + ".txt";
 		SimpleLayout layout = new SimpleLayout();  
 	    FileAppender appender = new FileAppender(layout, fileNameAndPath,false);  
 	    appender.setLayout(new PatternLayout("%d{yyyy-MM-dd HH:mm:ss} [%t] %m%n"));
+	    fileLogger.removeAllAppenders();
 	    fileLogger.addAppender(appender);
 	    fileLogger.setLevel((Level) Level.INFO);
 		fileLogger.info("Starting up...");
@@ -76,17 +77,6 @@ public class ScraperImplementationMI {
 		System.setProperty ("twitter4j.loggerFactory","twitter4j.internal.logging.NullLoggerFactory");
 		PropertyConfigurator.configure("log4j.properties");
 		updateLogger();
-		/*DateTime currentTime = new DateTime();
-		DateTime checkTime;
-		currentDate = currentTime.getMonthOfYear() + "_" + currentTime.getDayOfMonth() + "_" + currentTime.getYear();
-		//checkDate = currentTime.getMonthOfYear() + "_" + currentTime.getDayOfMonth() + "_" + currentTime.getYear();
-		String fileNameAndPath = Settings.getFilePathForLogFile() + "logFile" + currentDate + ".txt";
-		SimpleLayout layout = new SimpleLayout();  
-	    FileAppender appender = new FileAppender(layout, fileNameAndPath,false);  
-	    appender.setLayout(new PatternLayout("%d{yyyy-MM-dd HH:mm:ss} [%t] %m%n"));
-	    fileLogger.addAppender(appender);
-	    fileLogger.setLevel((Level) Level.INFO);
-		fileLogger.info("Starting up...");*/
 		DateTime checkTime;
 		Toolkit.getDefaultToolkit().beep();
 		try {
