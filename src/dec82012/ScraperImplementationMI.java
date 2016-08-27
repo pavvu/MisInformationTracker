@@ -87,10 +87,7 @@ public class ScraperImplementationMI {
 			e.printStackTrace();
 		}
 		
-		TableManager twitterTable = new TableManager(con, currentDate);
-	
-		//TableManager.createNewIndex(deleteRowsInIndex, addRowsInIndex);
-		
+		TableManager twitterTable = new TableManager(con, currentDate);		
 		// Retrieve from our database the names and stock symbols of the companies that we would like to scrape.
 		try {
 			Statement statement = null;
@@ -151,7 +148,7 @@ public class ScraperImplementationMI {
 			}
 			try {
 				recordScraping++;
-				fileLogger.info(recordScraping + " successful scraping sessions.");
+				fileLogger.info(recordScraping + " successful scraping sessions. ");
 				fileLogger.info(totalUserTweets + " total User tweets scraped.");
 				// logging for every 5 minutes
 				Thread.sleep(5L * Settings.getScrapeTimer() * 1000L);
